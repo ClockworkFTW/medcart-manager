@@ -1,0 +1,64 @@
+{{!-- Page name --}}
+<h1>Drugs</h1>
+
+{{!-- Create a table --}}
+<table id="drugs-table">
+    <thead>
+        <tr>
+            <th>Generic Name</th>
+            <th>Brand Name</th>
+            <th>Description</th>
+            <th>Controlled</th>
+            <th>Strength</th>
+            <th>Action</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each data}}
+        <tr>
+            <td>{{this.genericName}}</td>
+            <td>{{this.brandName}}</td>
+            <td>{{this.description}}</td>
+            <td>{{#if this.isControlled}}Yes{{else}}No{{/if}}</td>
+            <td>{{this.strength}}</td>
+            <td>{{this.action}}</td>
+            <td><button onclick="deleteDrug({{this.drugID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{!-- Form to add a record to the table --}}
+<h2>Add a Drug</h2>
+<p>To add a new drug, please enter the information below and click 'Submit'.</p>
+<form id="add-drug-form" method="POST" action="/add-drug-form">
+    <div class="group">
+        <label for="input-generic">Generic Name: </label>
+        <input type="text" name="genericName" id="input-generic">
+    </div>
+    <div class="group">
+        <label for="input-brand">Brand Name: </label>
+        <input type="text" name="brandName" id="input-brand">
+    </div>
+    <div class="group">
+        <label for="input-desc">Description: </label>
+        <input type="text" name="description" id="input-desc">
+    </div>
+    <div class="group">
+        <label for="input-contr">Controlled: </label>
+        <input type="text" name="isControlled" id="input-contr">
+    </div>
+    <div class="group">
+        <label for="input-strength">Strength: </label>
+        <input type="text" name="strength" id="input-strength">
+    </div>
+    <div class="group">
+        <label for="input-action">Action: </label>
+        <input type="text" name="action" id="input-action">
+    </div>
+    <input type="submit">
+</form>
+
+{{!-- Scripts --}}
+<script src="./js/delete_drug.js"></script>

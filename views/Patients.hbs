@@ -1,0 +1,46 @@
+{{!-- Page name --}}
+<h1>Patients</h1>
+
+{{!-- Create a table --}}
+<table id="patients-table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Date of Birth</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each data}}
+       <tr data-value={{this.patientID}}>
+            <td>{{this.patientFName}}</td>
+            <td>{{this.patientLName}}</td>
+            <td>{{formatDate this.dob}}</td>
+            <td><button onclick="deletePatient({{this.patientID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{!-- Form to add a record to the table --}}
+<h2>Add a Patient</h2>
+<p>To add a new patient, please enter their information below and click 'Submit'.</p>
+<form id="create-patient-form" method="POST" action="/patients">
+    <div class="group">
+        <label for="input-fname">First Name: </label>
+        <input type="text" name="fname" id="input-fname">
+    </div>
+    <div class="group">
+        <label for="input-lname">Last Name: </label>
+        <input type="text" name="lname" id="input-lname">
+    </div>
+    <div class="group">
+        <label for="input-dob">Date of Birth: </label>
+        <input type="date" name="dob" id="input-dob">
+    </div>
+    <input type="submit">
+</form>
+
+{{!-- Scripts --}}
+<script src="./js/delete_patient.js"></script>

@@ -1,0 +1,21 @@
+{
+  "name": "medcart",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "forever start app.js",
+    "dev": "npx nodemon app.js"
+  },
+  "author": "Mikaila Martin, John Boyle",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-handlebars": "^6.0.5",
+    "forever": "^4.0.3",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.16"
+  }
+}

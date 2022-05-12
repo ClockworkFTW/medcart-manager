@@ -1,0 +1,37 @@
+{{!-- Page name --}}
+<h1>Nurses Has Patients</h1>
+
+{{!-- Create a table --}}
+<table id="nurses_has_patients-table">
+    <thead>
+        <tr>
+            <th>Nurse ID</th>
+            <th>Patient ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each data}}
+        <tr>
+            <td>{{this.nurseID}}</td>
+            <td>{{this.patientID}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{!-- Form to add a record to the table --}}
+<h2>Add a Nurse Patient Relationship</h2>
+<p>To add a new nurse patient relationship, please enter their information below and click 'Submit'.</p>
+<form id="add-nhp-form" method="POST" action="/add-nhp-form">
+    <div class="group">
+        <label for="input-nurse">NurseID: </label>
+        <input type="number" name="input-nurse" id="input-nurse">
+    </div>
+    <div class="group">
+        <label for="input-pat">PatientID: </label>
+        <input type="number" name="input-pat" id="input-pat">
+    </div>
+    <input type="submit">
+</form>
+
+{{!-- Scripts --}}

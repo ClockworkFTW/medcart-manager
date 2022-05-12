@@ -1,0 +1,46 @@
+{{!-- Page name --}}
+<h1>Dispenses</h1>
+
+{{!-- Create a table --}}
+<table id="dispenses-table">
+    <thead>
+        <tr>
+            <th>Dispense Date</th>
+            <th>Prescription ID</th>
+            <th>Nurse ID</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each data}}
+        <tr>
+            <td>{{formatDate this.dispenseDate}}</td>
+            <td>{{this.prescriptionID}}</td>
+            <td>{{this.nurseID}}</td>
+            <td><button onclick="deleteDispense({{this.dispenseID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{!-- Form to add a record to the table --}}
+<h2>Add a Dispense</h2>
+<p>To add a new dispense, please enter the information below and click 'Submit'.</p>
+<form id="add-dispense-form" method="POST" action="/add-dispense-form">
+    <div class="group">
+        <label for="input-date">Dispense Date: </label>
+        <input type="date" name="input-date" id="input-date">
+    </div>
+    <div class="group">
+        <label for="input-pID">Prescription ID: </label>
+        <input type="number" name="input-pID" id="input-pID">
+    </div>
+    <div class="group">
+        <label for="input-nID">Nurse ID: </label>
+        <input type="number" name="input-nID" id="input-nID">
+    </div>
+    <input type="submit">
+</form>
+
+{{!-- Scripts --}}
+<script src="./js/delete_dispense.js"></script>

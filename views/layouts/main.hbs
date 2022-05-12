@@ -1,0 +1,39 @@
+<!-- main.hbs-->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>MedCart Management</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="./css/reset.css" />
+        <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    </head>
+    <header id="header-wrapper">
+        <div id="header-container">
+            <a id="nav-logo" href="/">
+                MedCart Management
+            </a>
+            <nav>
+                <a class="nav-link" href="/patients">Patients</a>
+                <a class="nav-link" href="/drugs">Drugs</a>
+                <a class="nav-link" href="/nurses">Nurses</a>
+                <a class="nav-link" href="/nhp">Nurses has Patients</a>
+                <a class="nav-link" href="/dispenses">Dispenses</a>
+                <a class="nav-link" href="/prescriptions">Prescriptions</a>
+            </nav>
+        </div>
+    </header>
+    <body id="main-wrapper">
+        <div id="main-container">
+            {{{body}}}
+        </div>
+    </body>
+    <footer id="footer-wrapper">
+        <div id="footer-container">
+            <p>Created by team Mik &amp; Nik</p>
+        </div>
+    </footer>
+</html>
