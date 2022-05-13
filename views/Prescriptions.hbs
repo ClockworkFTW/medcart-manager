@@ -20,14 +20,13 @@
     <tbody>
         {{#each data}}
         <tr>
-            <td>{{this.prescriptionID}}</td>
             <td>{{formatDate this.issueDate}}</td>
             <td>{{this.dosage}}</td>
             <td>{{this.route}}</td>
             <td>{{this.frequency}}</td>
             <td>{{this.refills}}</td>
             <td>{{this.prescriber}}</td>
-            <td>{{this.specialNotes}}</td>
+            <td>{{#if this.specialNotes}}{{this.specialNotes}}{{else}}None{{/if}}</td>
             <td>{{this.drugID}}</td>
             <td>{{this.patientID}}</td>
             <td><button onclick="deletePrescription({{this.prescriptionID}})">Delete</button></td>

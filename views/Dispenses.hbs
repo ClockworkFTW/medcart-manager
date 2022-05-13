@@ -5,9 +5,9 @@
 <table id="dispenses-table">
     <thead>
         <tr>
-            <th>Dispense Date</th>
+            <th>Date</th>
             <th>Prescription ID</th>
-            <th>Nurse ID</th>
+            <th>Nurse</th>
             <th>Delete</th>
         </tr>
     </thead>
@@ -16,7 +16,7 @@
         <tr>
             <td>{{formatDate this.dispenseDate}}</td>
             <td>{{this.prescriptionID}}</td>
-            <td>{{this.nurseID}}</td>
+            <td>{{this.nurseFName}} {{this.nurseLName}}</td>
             <td><button onclick="deleteDispense({{this.dispenseID}})">Delete</button></td>
         </tr>
         {{/each}}

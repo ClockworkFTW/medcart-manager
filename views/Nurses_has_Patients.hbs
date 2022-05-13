@@ -2,18 +2,20 @@
 <h1>Nurses Has Patients</h1>
 
 {{!-- Create a table --}}
-<table id="nurses_has_patients-table">
+<table id="nhp-table">
     <thead>
         <tr>
-            <th>Nurse ID</th>
-            <th>Patient ID</th>
+            <th>Nurse</th>
+            <th>Patient</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
-        {{#each data}}
-        <tr>
-            <td>{{this.nurseID}}</td>
-            <td>{{this.patientID}}</td>
+        {{#each nhp}}
+        <tr data-value-nid={{this.nurseID}} data-value-pid={{this.patientID}}>
+            <td>{{this.nurseFName}} {{this.nurseLName}}</td>
+            <td>{{this.patientFName}} {{this.patientLName}}</td>
+            <td><button onclick="deleteNHP({{this.nurseID}},{{this.patientID}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
@@ -22,16 +24,27 @@
 {{!-- Form to add a record to the table --}}
 <h2>Add a Nurse Patient Relationship</h2>
 <p>To add a new nurse patient relationship, please enter their information below and click 'Submit'.</p>
-<form id="add-nhp-form" method="POST" action="/add-nhp-form">
+<form id="create-nhp-form" method="POST" action="/nhp">
     <div class="group">
-        <label for="input-nurse">NurseID: </label>
-        <input type="number" name="input-nurse" id="input-nurse">
+        <label for="select_nurseID">Full name</label>
+        <select name="nurseID" id="select_nurseID">
+            <option value="test">Select a Nurse</option>
+            {{#each nurses}}
+            <option value="{{this.nurseID}}">{{this.nurseFName}} {{this.nurseLName}}</option>
+            {{/each}}
+        </select>
     </div>
     <div class="group">
-        <label for="input-pat">PatientID: </label>
-        <input type="number" name="input-pat" id="input-pat">
+        <label for="select_patientID">Full name</label>
+        <select name="patientID" id="select_patientID">
+            <option value="test">Select a Patient</option>
+            {{#each patients}}
+            <option value="{{this.patientID}}">{{this.patientFName}} {{this.patientLName}}</option>
+            {{/each}}
+        </select>
     </div>
     <input type="submit">
 </form>
 
 {{!-- Scripts --}}
+<script src="./js/delete_nhp.js"></script>
