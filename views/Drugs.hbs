@@ -16,11 +16,11 @@
     </thead>
     <tbody>
         {{#each data}}
-        <tr>
+        <tr data-value={{this.drugID}}>
             <td>{{this.genericName}}</td>
             <td>{{this.brandName}}</td>
             <td>{{this.description}}</td>
-            <td>{{#if this.isControlled}}Yes{{else}}No{{/if}}</td>
+            <td>{{this.isControlled}}</td>  
             <td>{{this.strength}}</td>
             <td>{{this.action}}</td>
             <td><button onclick="deleteDrug({{this.drugID}})">Delete</button></td>
@@ -32,7 +32,7 @@
 {{!-- Form to add a record to the table --}}
 <h2>Add a Drug</h2>
 <p>To add a new drug, please enter the information below and click 'Submit'.</p>
-<form id="add-drug-form" method="POST" action="/add-drug-form">
+<form id="add-drug-form" method="POST" action="/drugs">
     <div class="group">
         <label for="input-generic">Generic Name: </label>
         <input type="text" name="genericName" id="input-generic">
@@ -47,7 +47,11 @@
     </div>
     <div class="group">
         <label for="input-contr">Controlled: </label>
-        <input type="text" name="isControlled" id="input-contr">
+        <select name="isControlled" id="input-contr">
+            <option value="test">Select one</option>
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
     </div>
     <div class="group">
         <label for="input-strength">Strength: </label>

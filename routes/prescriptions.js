@@ -18,7 +18,7 @@ router.post('/', (req, res) => {
 
     console.log(req.body)
 
-    const query1 = `INSERT INTO Prescriptions (issueDate, dosage, route, frequency, refills, prescriber, specialNotes, drugID, patientID) VALUES ('${issueDate}', '${dosage}', '${route}','${frequency}', ${refills},'${doctor}', '${specialNotes}',${drugID}, ${patientID})`;
+    const query1 = `INSERT INTO Prescriptions (issueDate, dosage, route, frequency, refills, prescriber, specialNotes, drugID, patientID) VALUES ('${issueDate}', '${dosage}', '${route}','${frequency}', ${refills},'${prescriber}', '${specialNotes}',${drugID}, ${patientID})`;
     
     db.pool.query(query1, (error, rows, fields) => {
         if (error) {
@@ -32,12 +32,22 @@ router.post('/', (req, res) => {
 
 // Delete existing prescripton
 router.delete('/:prescriptionID', (req, res) => {
-
+    
+    // Data
     const prescriptionID = parseInt(req.params.prescriptionID);
-    console.log(prescriptionID);
-    res.sendStatus(200);
 
-    // TODO: delete from database
+    // Query
+    const delete_prescription = `DELETE FROM Prescriptions WHERE prescriptionID=${prescriptionID}`;
+
+    // Delete Prescription
+    db.pool.query(delete_prescription, (error, rows, fields) => {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.sendStatus(204);   
+    }
+    })
 
 });
 

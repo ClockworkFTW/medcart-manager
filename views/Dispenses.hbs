@@ -13,7 +13,7 @@
     </thead>
     <tbody>
         {{#each data}}
-        <tr>
+        <tr data-value={{this.dispenseID}}>
             <td>{{formatDate this.dispenseDate}}</td>
             <td>{{this.prescriptionID}}</td>
             <td>{{this.nurseFName}} {{this.nurseLName}}</td>
@@ -26,7 +26,7 @@
 {{!-- Form to add a record to the table --}}
 <h2>Add a Dispense</h2>
 <p>To add a new dispense, please enter the information below and click 'Submit'.</p>
-<form id="add-dispense-form" method="POST" action="/add-dispense-form">
+<form id="add-dispense-form" method="POST" action="/dispenses">
     <div class="group">
         <label for="input-date">Dispense Date: </label>
         <input type="date" name="input-date" id="input-date">

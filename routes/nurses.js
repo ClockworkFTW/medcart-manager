@@ -14,10 +14,10 @@ router.get('/', (req, res) => {
 
 
 // Create new nurse
-router.post('/add-nurse-form', (req, res) => {
-    const data = req.body;
+router.post('/', (req, res) => {
+    const {fname, lname, licnum, licexp} = req.body;
 
-    const query1 = `INSERT INTO Nurses (nurseFName, nurseLName, licenseNumber, licenseExpiration) VALUES ('${data['input-fname']}', '${data['input-lname']}', '${data['input-licnum']}','${data['input-exp']}')`;
+    const query1 = `INSERT INTO Nurses (nurseFName, nurseLName, licenseNumber, licenseExpiration) VALUES ('${fname}', '${lname}', '${licnum}','${licexp}')`;
     
     db.pool.query(query1, (error, rows, fields) => {
         if (error) {
@@ -60,11 +60,21 @@ router.put('/put-nurse-ajax', (req,res,next) => {
 // Delete existing nurse
 router.delete('/:nurseID', (req, res) => {
 
+    // Data
     const nurseID = parseInt(req.params.nurseID);
-    console.log(nurseID);
-    res.sendStatus(200);
 
-    // TODO: delete from database
+    // Query
+    const delete_nurse = `DELETE FROM Nurses WHERE nurseID=${nurseID}`;
+
+    // Delete Nurse
+    db.pool.query(delete_nurse, (error, rows, fields) => {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.sendStatus(204);   
+    }
+    })
 
 });
 

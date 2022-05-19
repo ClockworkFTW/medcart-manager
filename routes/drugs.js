@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 }); 
 
 // Create new drug
-router.post('/add-drug-form', (req, res) => {
+router.post('/', (req, res) => {
     const {genericName, brandName, description, isControlled, strength, action} = req.body;
     
     const query1 = `INSERT INTO Drugs (genericName, brandName, description, isControlled, strength, action) VALUES ('${genericName}', '${brandName}', '${description}','${isControlled}', '${strength}', '${action}')`;
@@ -31,11 +31,21 @@ router.post('/add-drug-form', (req, res) => {
 // Delete existing drug
 router.delete('/:drugID', (req, res) => {
 
+    // Data
     const drugID = parseInt(req.params.drugID);
-    console.log(drugID);
-    res.sendStatus(200);
 
-    // TODO: delete from database
+    // Query
+    const delete_drug = `DELETE FROM Drugs WHERE drugID=${drugID}`;
+
+    // Delete Drug
+    db.pool.query(delete_drug, (error, rows, fields) => {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.sendStatus(204);   
+    }
+    })
 
 });
 
