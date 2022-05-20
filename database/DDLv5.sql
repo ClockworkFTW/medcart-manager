@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS Drugs (
 	genericName VARCHAR(255) NULL,
 	brandName VARCHAR(255) NULL,
 	description TEXT NOT NULL,
-	isControlled TEXT NOT NULL,
+	isControlled VARCHAR(5) NOT NULL,
 	strength TEXT NOT NULL,
 	action TEXT NOT NULL,
 	PRIMARY KEY (drugID)
