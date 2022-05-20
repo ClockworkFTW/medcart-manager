@@ -49,26 +49,40 @@
 </form>
 
 {{!-- Form to update a record in the table --}}
-<h2>Update a Nurse's License</h2>
-<p>To update a nurse's license information select their name from the drop down menu, enter the new information, and click 'Submit'.</p>
+<h2>Update a Nurse</h2>
+<p>To update a nurse's information, select their name from the drop down menu, enter the new information, and click 'Submit'.</p>
 <form id="update-nurse-form-ajax">
+   
     <div class="group">
-        <label for="select_fname">Full name: </label>
-        <select name="fname" id="select_fname">
+        <label for="select-fname">Full name: </label>
+        <select name="select-fname" id="select-fname">
             <option value="test">Select a Nurse</option>
             {{#each data}}
             <option value="{{this.nurseID}}">{{this.nurseFName}} {{this.nurseLName}}</option>
             {{/each}}
         </select>
     </div>
+
+    <div class="group">
+        <label for="input-fname">First Name: </label>
+        <input type="text" name="fname" id="input-fname">
+    </div>
+
+    <div class="group">
+        <label for="input-lname">Last Name: </label>
+        <input type="text" name="lname" id="input-lname">
+    </div>
+
     <div class="group">
         <label for="input-licnum">License Number: </label>
         <input type="text" name="licnum" id="input-licnum">
     </div>
+
     <div class="group">
         <label for="input-licexp">License Expiration: </label>
         <input type="date" name="licexp" id="input-licexp">
     </div>
+
     <input type="submit">
 </form>
 

@@ -29,38 +29,24 @@ router.post('/', (req, res) => {
 });
 
 // Delete existing patient
-router.delete('/:patientID', (req, res, next) => {
+router.delete('/:patientID', (req, res) => {
 
-    // FIX: fk constraint causing error on delete
-
+    // Data
     const patientID = parseInt(req.params.patientID);
 
-    const deletePatients_pat = `DELETE FROM Patients WHERE patientID = ${patientID}`;
-    const deleteNHP_pat= `DELETE FROM Nurses_has_Patients WHERE patientID = ${patientID}`;
-    const deletePres_pat= `DELETE FROM Prescriptions WHERE patientID = ${patientID}`;
+    // Query
+    const delete_patient = `DELETE FROM Patients WHERE patientID=${patientID}`;
 
-    db.pool.query(deletePatients_pat, [patientID], (error, rows, fields) => {
+    // Delete Patient
+    db.pool.query(delete_patient, (error, rows, fields) => {
         if (error) {
             console.log(error);
             res.sendStatus(400);
         } else {
-            db.pool.query(deleteNHP_pat, [patientID], (error, rows, fields) => {
-                if (error) {
-                    console.log(error);
-                    res.sendStatus(400);
-                } else {
-                    db.pool.query(deletePres_pat, [patientID], (error, rows, fields) => {
-                        if (error) {
-                            console.log(error);
-                            res.sendStatus(400);
-                        } else {
-                            res.sendStatus(204);
-                        }
-                    })
-                }
-            })
+            res.sendStatus(204);   
         }
     })
+
 });
 
 module.exports = router

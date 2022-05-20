@@ -29,33 +29,27 @@ router.post('/', (req, res) => {
     })
 });
 
-// Update nurse license
-router.put('/put-nurse-ajax', (req,res,next) => {
-    const data = req.body;
+// Update a nurse
+router.put('/put-nurse-ajax'), (req, res, next) => {
+    
+    // Data
+    //const nurseID = parseInt(req.params.nurseID);
+    const {nurseID,fname, lname, licnum, licexp} = req.body;
 
-    const queryUpdateWorld = `UPDATE bsg_people SET homeworld = ? WHERE bsg_people.id = ?`;
-    const selectWorld = `SELECT * FROM bsg_planets WHERE id = ?`
-  
-    // Run the 1st query
-    db.pool.query(queryUpdateWorld, [homeworld, person], (error, rows, fields) => {
+    // Query
+    const update_nurse = `UPDATE Nurses SET nurseFName = '${fname}', nurseLName = '${lname}', licenseNumber = '${licnum}', licenseExpiration = '${licexp}' WHERE nurseID = ${nurseID}`;
+    console.log("update nurse request")
+    // Update Nurse
+    db.pool.query(update_nurse, (error, rows, fields) => {
         if (error) {
-            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
             console.log(error);
             res.sendStatus(400);
         } else {
-            // If there was no error, we run our second query and return that data so we can use it to update the people's
-            // table on the front-end
-            db.pool.query(selectWorld, [homeworld], (error, rows, fields) => {
-                if (error) {
-                    console.log(error);
-                    res.sendStatus(400);
-                } else {
-                    res.send(rows);
-                }
-            })
+            res.sendStatus(204);   
         }
     })
-});
+};
+
 
 // Delete existing nurse
 router.delete('/:nurseID', (req, res) => {
@@ -73,7 +67,7 @@ router.delete('/:nurseID', (req, res) => {
             res.sendStatus(400);
         } else {
             res.sendStatus(204);   
-    }
+        }
     })
 
 });
