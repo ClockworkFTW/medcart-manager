@@ -14,7 +14,7 @@
     </thead>
     <tbody>
         {{#each data}}
-        <tr>
+        <tr data-value={{this.nurseID}}>
             <td>{{this.nurseFName}}</td>
             <td>{{this.nurseLName}}</td>
             <td>{{this.licenseNumber}}</td>
@@ -28,7 +28,7 @@
 {{!-- Form to add a record to the table --}}
 <h2>Add a Nurse</h2>
 <p>To add a new nurse, please enter their information below and click 'Submit'.</p>
-<form id="add-nurse-form" method="POST" action="/">
+<form id="add-nurse-form" method="POST" action="/nurses">
     <div class="group">
         <label for="input-fname">First Name: </label>
         <input type="text" name="fname" id="input-fname">

@@ -20,7 +20,7 @@ const deleteNurse = (nurseID) => {
 const deleteRow = (nurseID) => {
     // Get table html element
     const table = document.getElementById("nurses-table");
-
+    
     // Delete row with matching nurseID
     for (let i = 0, row; row = table.rows[i]; i++) {
         if (table.rows[i].getAttribute("data-value") == nurseID) {

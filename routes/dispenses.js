@@ -31,11 +31,21 @@ router.post('/', (req, res) => {
 // Delete existing dispense event
 router.delete('/:dispenseID', (req, res) => {
 
+    // Data
     const dispenseID = parseInt(req.params.dispenseID);
-    console.log(dispenseID);
-    res.sendStatus(200);
 
-    // TODO: delete from database
+    // Query
+    const delete_dispense = `DELETE FROM Dispenses WHERE dispenseID=${dispenseID}`;
+
+    // Delete Dispense
+    db.pool.query(delete_dispense, (error, rows, fields) => {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.sendStatus(204);   
+    }
+    })
 
 });
 
