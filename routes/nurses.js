@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 
 
 // Create new nurse
-router.post('/', (req, res) => {
+router.post('/create', (req, res) => {
     const {fname, lname, licnum, licexp} = req.body;
 
     const query1 = `INSERT INTO Nurses (nurseFName, nurseLName, licenseNumber, licenseExpiration) VALUES ('${fname}', '${lname}', '${licnum}','${licexp}')`;
@@ -29,26 +29,25 @@ router.post('/', (req, res) => {
     })
 });
 
-// Update a nurse
-router.put('/put-nurse-ajax'), (req, res, next) => {
+// Update existing nurse
+router.post('/update', (req, res) => {
     
     // Data
-    //const nurseID = parseInt(req.params.nurseID);
-    const {nurseID,fname, lname, licnum, licexp} = req.body;
+    const {nurseID, licnum, licexp} = req.body;
 
     // Query
-    const update_nurse = `UPDATE Nurses SET nurseFName = '${fname}', nurseLName = '${lname}', licenseNumber = '${licnum}', licenseExpiration = '${licexp}' WHERE nurseID = ${nurseID}`;
-    console.log("update nurse request")
+    const update_nurse = `UPDATE Nurses SET licenseNumber = '${licnum}', licenseExpiration = '${licexp}' WHERE nurseID = ${nurseID}`;
+
     // Update Nurse
     db.pool.query(update_nurse, (error, rows, fields) => {
         if (error) {
             console.log(error);
             res.sendStatus(400);
         } else {
-            res.sendStatus(204);   
+            res.redirect('/nurses');
         }
     })
-};
+});
 
 
 // Delete existing nurse
