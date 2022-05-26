@@ -1,6 +1,12 @@
 {{!-- Page name --}}
 <h1>Drugs</h1>
 
+{{!-- Search bar --}}
+<div class="group">
+    <label for="search-drug-generic-name">Search by Generic Name: </label>
+    <input type="text" id="search-drug-generic-name">
+</div>
+
 {{!-- Create a table --}}
 <table id="drugs-table">
     <thead>
@@ -17,7 +23,7 @@
     <tbody>
         {{#each data}}
         <tr data-value={{this.drugID}}>
-            <td>{{this.genericName}}</td>
+            <td class="generic-name">{{this.genericName}}</td>
             <td>{{this.brandName}}</td>
             <td>{{this.description}}</td>
             <td>{{this.isControlled}}</td>  
@@ -65,4 +71,5 @@
 </form>
 
 {{!-- Scripts --}}
+<script src="./js/search_drugs.js"></script>
 <script src="./js/delete_drug.js"></script>
