@@ -50,6 +50,8 @@ html {
 #main-container {
     margin: 40px auto;
     max-width: 1200px;
+    position: relative;
+    min-height: 80vh;
 }
 
 h1 {
@@ -62,6 +64,29 @@ h2 {
     margin: 10px 0;
     font-size: 22px;
     font-weight: 700;
+}
+
+a.two:link { 
+    color: #2c3e50;
+    text-decoration: none; 
+}
+
+
+a.two:visited { 
+    color: #2c3e50;
+    text-decoration: none; 
+}
+
+
+a.two:hover { 
+    color: #f39c12;
+    text-decoration: none; 
+}
+
+
+a.two:active { 
+    color: #2c3e50;
+    text-decoration: none; 
 }
 
 /* TABLES */
