@@ -12,7 +12,7 @@
         </tr>
     </thead>
     <tbody>
-        {{#each data}}
+        {{#each dispenses}}
         <tr data-value={{this.dispenseID}}>
             <td>{{formatDate this.dispenseDate}}</td>
             <td>{{this.prescriptionID}}</td>
@@ -36,8 +36,14 @@
         <input type="number" name="input-pID" id="input-pID">
     </div>
     <div class="group">
-        <label for="input-nID">Nurse ID: </label>
-        <input type="number" name="input-nID" id="input-nID">
+        <label for="input_nID">Nurse's Full Name</label>
+        <select name="nurseID" id="input_nID">
+            <option value="test">Select a Nurse</option>
+            {{#each nurses}}
+            <option value="{{this.nurseID}}">{{this.nurseFName}} {{this.nurseLName}}</option>
+            {{/each}}
+            <option value="NULL">NULL</option>
+        </select>
     </div>
     <input type="submit">
 </form>

@@ -4,12 +4,21 @@ const router = express.Router()
 const db = require('../database/db-connector')
 
 // Get all dispense events
-router.get('/', (req, res) => {  
-    const select_dispenses = "SELECT Dispenses.dispenseID, Dispenses.dispenseDate, Prescriptions.prescriptionID, Nurses.nurseID, Nurses.nurseFName, Nurses.nurseLName FROM Dispenses INNER JOIN Nurses on Nurses.nurseID = Dispenses.nurseID INNER JOIN Prescriptions on Prescriptions.prescriptionID = Dispenses.prescriptionID"
+router.get('/', async (req, res) => {  
+    try { 
+        // Queries
+        const select_dispenses = "SELECT Dispenses.dispenseID, Dispenses.dispenseDate, Prescriptions.prescriptionID, Nurses.nurseID, Nurses.nurseFName, Nurses.nurseLName FROM Dispenses INNER JOIN Nurses on Nurses.nurseID = Dispenses.nurseID INNER JOIN Prescriptions on Prescriptions.prescriptionID = Dispenses.prescriptionID"
+        const select_nurses = "SELECT nurseID, nurseFName, nurseLName from Nurses"
 
-    db.pool.query(select_dispenses, (error, rows) => {
-        res.render('Dispenses', {data: rows});                  
-    })                                                      
+        // Data 
+        const nurses = await db.pquery(select_nurses);
+        const dispenses = await db.pquery(select_dispenses);
+
+        // Render
+        res.render('Dispenses', {dispenses, nurses});  
+    } catch (error) {
+        console.log(error)
+    }
 }); 
 
 // Create new dispense event
