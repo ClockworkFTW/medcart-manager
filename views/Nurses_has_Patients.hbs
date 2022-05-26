@@ -23,10 +23,10 @@
 
 {{!-- Form to add a record to the table --}}
 <h2>Add a Nurse Patient Relationship</h2>
-<p>To add a new nurse patient relationship, please enter their information below and click 'Submit'.</p>
+<p>To add a new nurse patient relationship, please select a nurse and patient below and click 'Submit'.</p>
 <form id="create-nhp-form" method="POST" action="/nhp">
     <div class="group">
-        <label for="select_nurseID">Full name</label>
+        <label for="select_nurseID">Nurse</label>
         <select name="nurseID" id="select_nurseID">
             <option value="test">Select a Nurse</option>
             {{#each nurses}}
@@ -35,7 +35,7 @@
         </select>
     </div>
     <div class="group">
-        <label for="select_patientID">Full name</label>
+        <label for="select_patientID">Patient</label>
         <select name="patientID" id="select_patientID">
             <option value="test">Select a Patient</option>
             {{#each patients}}
