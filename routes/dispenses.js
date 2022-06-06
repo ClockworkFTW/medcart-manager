@@ -1,4 +1,7 @@
-const express = require('express')
+// Adapted from https://github.com/osu-cs340-ecampus/nodejs-starter-app
+
+const express = require('express');
+const { NULL } = require('mysql/lib/protocol/constants/types');
 const router = express.Router()
 
 const db = require('../database/db-connector')
@@ -25,7 +28,15 @@ router.get('/', async (req, res) => {
 router.post('/', (req, res) => {
     const data = req.body;
 
-    const query1 = `INSERT INTO Dispenses (dispenseDate, prescriptionID, nurseID) VALUES ('${data['input-date']}', '${data['input-pID']}', '${data['input-nID']}')`;
+    console.log(data)
+
+    var query1 = `INSERT INTO Dispenses (dispenseDate, prescriptionID, nurseID) VALUES ('${data['input-date']}', '${data['input-pID']}', '${data['input-nID']}')`;
+    
+    if (data['input-nID'] == " ") {
+        query1 = `INSERT INTO Dispenses (dispenseDate, prescriptionID, nurseID) VALUES ('${data['input-date']}', '${data['input-pID']}', NULL)`;
+    }
+
+    console.log(query1)
     
     db.pool.query(query1, (error, rows) => {
         if (error) {

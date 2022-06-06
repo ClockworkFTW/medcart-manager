@@ -1,3 +1,5 @@
+// Adapted from https://github.com/osu-cs340-ecampus/nodejs-starter-app
+
 const search_input = document.getElementById("search-drug-generic-name");
 
 search_input.addEventListener("keyup", (e) => {

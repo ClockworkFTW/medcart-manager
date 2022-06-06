@@ -1,3 +1,5 @@
+// Adapted from https://github.com/osu-cs340-ecampus/nodejs-starter-app
+
 // Get the objects we need to modify
 let updateNurseForm = document.getElementById('update-nurse-form-ajax');
 

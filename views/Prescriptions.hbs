@@ -1,3 +1,5 @@
+{{!-- Adapted from https://github.com/osu-cs340-ecampus/nodejs-starter-app--}}
+
 {{!-- Page name --}}
 <h1>Prescriptions</h1>
 
@@ -12,13 +14,13 @@
             <th>Refills</th>
             <th>Prescriber</th>
             <th>Special Notes</th>
-            <th>Drug ID</th>
-            <th>Patient ID</th>
+            <th>Drug</th>
+            <th>Patient</th>
             <th>Delete</th>
         </tr>
     </thead>
     <tbody>
-        {{#each data}}
+        {{#each prescriptions}}
         <tr data-value={{this.prescriptionID}}>
             <td>{{formatDate this.issueDate}}</td>
             <td>{{this.dosage}}</td>
@@ -26,9 +28,9 @@
             <td>{{this.frequency}}</td>
             <td>{{this.refills}}</td>
             <td>{{this.prescriber}}</td>
-            <td>{{#if this.specialNotes}}{{this.specialNotes}}{{else}}None{{/if}}</td>
-            <td>{{this.drugID}}</td>
-            <td>{{this.patientID}}</td>
+            <td>{{#if this.specialnotes}}{{this.specialnotes}}{{else}}None{{/if}}</td>
+            <td>{{this.genericname}}</td>
+            <td>{{this.patientFullName}}</td>
             <td><button onclick="deletePrescription({{this.prescriptionID}})">Delete</button></td>
         </tr>
         {{/each}}
@@ -67,13 +69,26 @@
         <label for="input-specialNote">Special Notes: </label>
         <input type="text" name="specialNote" id="input-specialNote">
     </div>
+
     <div class="group">
-        <label for="input-drugID">Drug ID: </label>
-        <input type="number" name="drugID" id="input-drugID">
+        <label for="input-drugID">Drug Generic Name:</label>
+        <select name="drugID" id="input-drugID">
+            <option value="test">Select a Drug</option>
+            {{#each drugs}}
+            <option value="{{this.drugID}}">{{this.genericname}}</option>
+            {{/each}}
+        </select>
     </div>
+
+
     <div class="group">
-        <label for="input-patientID">Patient ID: </label>
-        <input type="number" name="patientID" id="input-patientID">
+        <label for="input-patientID">Patient's name:</label>
+        <select name="patientID" id="input-patientID">
+            <option value="test">Select a Patient</option>
+            {{#each patients}}
+            <option value="{{this.patientID}}">{{this.patientFName}} {{this.patientLName}}</option>
+            {{/each}}
+        </select>
     </div>
     <input type="submit">
 </form>

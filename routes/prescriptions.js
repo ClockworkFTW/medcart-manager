@@ -1,15 +1,30 @@
+// Adapted from https://github.com/osu-cs340-ecampus/nodejs-starter-app
+
 const express = require('express')
 const router = express.Router()
 
 const db = require('../database/db-connector')
 
 // Get all prescriptions
-router.get('/', (req, res) => {  
-    const query1 = "SELECT * FROM Prescriptions;";
+router.get('/', async (req, res) => {  
+     
+    try {
+        // Queries
+        const select_prescriptions = "SELECT p.prescriptionID, p.issueDate, p.dosage, p.route, p.frequency, p.refills, p.prescriber, p.specialnotes, d.genericname, CONCAT(pt.patientFName, ' ', pt.patientLName ) as patientFullName from Prescriptions p, Drugs d, Patients pt where p.drugID = d.drugID and p.patientID = pt.patientID";
+        const select_drugs = "SELECT drugID, genericname FROM Drugs;"
+        const select_patients = "SELECT * FROM Patients;"
 
-    db.pool.query(query1, (error, rows, fields) => {    
-        res.render('Prescriptions', {data: rows});                  
-    })                                                      
+        // Data
+
+        const prescriptions = await db.pquery(select_prescriptions);
+        const patients = await db.pquery(select_patients);
+        const drugs = await db.pquery(select_drugs);
+        
+        // Render
+        res.render('Prescriptions', {prescriptions, patients, drugs});  
+    } catch (error) {
+        console.log(error)
+    }
 }); 
 
 // Create new prescription
