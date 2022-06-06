@@ -1,5 +1,7 @@
+{{!-- Adapted from https://github.com/osu-cs340-ecampus/nodejs-starter-app--}}
+
 {{!-- Page name --}}
-<h1>Dispenses</h1>
+<h1>Dispense Records</h1>
 
 {{!-- Create a table --}}
 <table id="dispenses-table">
@@ -36,13 +38,13 @@
         <input type="number" name="input-pID" id="input-pID">
     </div>
     <div class="group">
-        <label for="input_nID">Nurse's Full Name</label>
-        <select name="nurseID" id="input_nID">
+        <label for="input-nID">Nurse's Full Name</label>
+        <select name="input-nID" id="input-nID">
             <option value="test">Select a Nurse</option>
+            <option value=" ">NULL</option>
             {{#each nurses}}
             <option value="{{this.nurseID}}">{{this.nurseFName}} {{this.nurseLName}}</option>
             {{/each}}
-            <option value="NULL">NULL</option>
         </select>
     </div>
     <input type="submit">

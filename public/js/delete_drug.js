@@ -1,3 +1,5 @@
+// Adapted from https://github.com/osu-cs340-ecampus/nodejs-starter-app
+
 const deleteDrug = (drugID) => {
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();

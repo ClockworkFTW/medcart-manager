@@ -1,3 +1,5 @@
+// Adapted from https://github.com/osu-cs340-ecampus/nodejs-starter-app
+
 const express = require('express')
 const router = express.Router()
 

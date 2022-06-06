@@ -168,7 +168,7 @@ CREATE TABLE IF NOT EXISTS Dispenses (
 	dispenseID INT NOT NULL UNIQUE AUTO_INCREMENT,
 	dispenseDate DATE NOT NULL,
 	prescriptionID INT NOT NULL,
-	nurseID INT,
+	nurseID INT NULL,
 	PRIMARY KEY (dispenseID),
     CONSTRAINT fk_Dispenses_Presc 
 		FOREIGN KEY (prescriptionID) 
