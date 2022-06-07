@@ -28,7 +28,11 @@
             <td>{{this.frequency}}</td>
             <td>{{this.refills}}</td>
             <td>{{this.prescriber}}</td>
-            <td>{{#if this.specialnotes}}{{this.specialnotes}}{{else}}None{{/if}}</td>
+            {{#if this.specialNotes}}
+            <td>{{this.specialNotes}}</td>
+            {{else}}
+            <td>None</td>
+            {{/if}}
             <td>{{this.genericname}}</td>
             <td>{{this.patientFullName}}</td>
             <td><button onclick="deletePrescription({{this.prescriptionID}})">Delete</button></td>
@@ -66,8 +70,8 @@
         <input type="text" name="prescriber" id="input-prescriber">
     </div>
     <div class="group">
-        <label for="input-specialNote">Special Notes: </label>
-        <input type="text" name="specialNote" id="input-specialNote">
+        <label for="input-specialNotes">Special Notes: </label>
+        <input type="text" name="specialNotes" id="input-specialNotes">
     </div>
 
     <div class="group">

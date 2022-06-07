@@ -3,6 +3,12 @@
 {{!-- Page name --}}
 <h1>Patients</h1>
 
+{{!-- Search bar --}}
+<div class="group">
+    <label for="search-patient-name">Search by Patient's First or Last Name: </label>
+    <input type="text" id="search-patient-name">
+</div>
+
 {{!-- Create a table --}}
 <table id="patients-table">
     <thead>
@@ -16,8 +22,8 @@
     <tbody>
         {{#each data}}
        <tr data-value={{this.patientID}}>
-            <td>{{this.patientFName}}</td>
-            <td>{{this.patientLName}}</td>
+            <td class="first-name">{{this.patientFName}}</td>
+            <td class="last-name">{{this.patientLName}}</td>
             <td>{{formatDate this.dob}}</td>
             <td><button onclick="deletePatient({{this.patientID}})">Delete</button></td>
         </tr>
@@ -45,4 +51,5 @@
 </form>
 
 {{!-- Scripts --}}
+<script src="./js/search_patients.js"></script>
 <script src="./js/delete_patient.js"></script>

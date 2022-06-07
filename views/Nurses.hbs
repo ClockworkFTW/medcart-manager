@@ -3,6 +3,12 @@
 {{!-- Page name --}}
 <h1>Nurses</h1>
 
+{{!-- Search bar --}}
+<div class="group">
+    <label for="search-nurse-name">Search by Nurse's First or Last Name: </label>
+    <input type="text" id="search-nurse-name">
+</div>
+
 {{!-- Create a table --}}
 <table id="nurses-table">
     <thead>
@@ -17,8 +23,8 @@
     <tbody>
         {{#each data}}
         <tr data-value={{this.nurseID}}>
-            <td>{{this.nurseFName}}</td>
-            <td>{{this.nurseLName}}</td>
+            <td class="first-name">{{this.nurseFName}}</td>
+            <td class="last-name">{{this.nurseLName}}</td>
             <td>{{this.licenseNumber}}</td>
             <td>{{formatDate this.licenseExpiration}}</td>
             <td><button onclick="deleteNurse({{this.nurseID}})">Delete</button></td>
@@ -75,5 +81,5 @@
 </form>
 
 {{!-- Scripts --}}
-<script src="./js/update_nurse.js"></script>
+<script src="./js/search_nurses.js"></script>
 <script src="./js/delete_nurse.js"></script>

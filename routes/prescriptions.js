@@ -10,12 +10,11 @@ router.get('/', async (req, res) => {
      
     try {
         // Queries
-        const select_prescriptions = "SELECT p.prescriptionID, p.issueDate, p.dosage, p.route, p.frequency, p.refills, p.prescriber, p.specialnotes, d.genericname, CONCAT(pt.patientFName, ' ', pt.patientLName ) as patientFullName from Prescriptions p, Drugs d, Patients pt where p.drugID = d.drugID and p.patientID = pt.patientID";
+        const select_prescriptions = "SELECT p.prescriptionID, p.issueDate, p.dosage, p.route, p.frequency, p.refills, p.prescriber, p.specialNotes, d.genericname, CONCAT(pt.patientFName, ' ', pt.patientLName ) as patientFullName from Prescriptions p, Drugs d, Patients pt where p.drugID = d.drugID and p.patientID = pt.patientID";
         const select_drugs = "SELECT drugID, genericname FROM Drugs;"
         const select_patients = "SELECT * FROM Patients;"
 
         // Data
-
         const prescriptions = await db.pquery(select_prescriptions);
         const patients = await db.pquery(select_patients);
         const drugs = await db.pquery(select_drugs);
@@ -29,11 +28,12 @@ router.get('/', async (req, res) => {
 
 // Create new prescription
 router.post('/', (req, res) => {
+    
+    // Data
     const {issueDate, dosage, route, frequency, refills, prescriber, specialNotes, drugID, patientID} = req.body;
 
-    console.log(req.body)
-
-    const query1 = `INSERT INTO Prescriptions (issueDate, dosage, route, frequency, refills, prescriber, specialNotes, drugID, patientID) VALUES ('${issueDate}', '${dosage}', '${route}','${frequency}', ${refills},'${prescriber}', '${specialNotes}',${drugID}, ${patientID})`;
+    // Query
+    const query1 = `INSERT INTO Prescriptions (issueDate, dosage, route, frequency, refills, prescriber, specialNotes, drugID, patientID) VALUES ('${issueDate}', '${dosage}', '${route}', '${frequency}', ${refills}, '${prescriber}', '${specialNotes}', ${drugID}, ${patientID})`;
     
     db.pool.query(query1, (error, rows, fields) => {
         if (error) {

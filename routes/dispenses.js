@@ -10,12 +10,17 @@ const db = require('../database/db-connector')
 router.get('/', async (req, res) => {  
     try { 
         // Queries
-        const select_dispenses = "SELECT Dispenses.dispenseID, Dispenses.dispenseDate, Prescriptions.prescriptionID, Nurses.nurseID, Nurses.nurseFName, Nurses.nurseLName FROM Dispenses INNER JOIN Nurses on Nurses.nurseID = Dispenses.nurseID INNER JOIN Prescriptions on Prescriptions.prescriptionID = Dispenses.prescriptionID"
+        const select_dispenses = "SELECT * FROM Dispenses"
         const select_nurses = "SELECT nurseID, nurseFName, nurseLName from Nurses"
 
         // Data 
         const nurses = await db.pquery(select_nurses);
-        const dispenses = await db.pquery(select_dispenses);
+        let dispenses = await db.pquery(select_dispenses);
+
+        dispenses = dispenses.map(d => {
+            const nurse = nurses.find(n => n.nurseID === d.nurseID);
+            return {...d, ...nurse}
+        })
 
         // Render
         res.render('Dispenses', {dispenses, nurses});  
